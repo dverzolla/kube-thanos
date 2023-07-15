@@ -22,8 +22,8 @@ find manifests -type f ! -name '*.yaml' -delete
 
 rm -rf examples/all/manifests
 rm -rf examples/development-minio
-mkdir examples/all/manifests
-mkdir examples/development-minio
+mkdir -p examples/all/manifests
+mkdir -p examples/development-minio
 
 ${JSONNET} -J vendor -m examples/all/manifests "${1-all.jsonnet}" | xargs -I{} sh -c "cat {} | ${GOJSONTOYAML} > {}.yaml; rm -f {}" -- {}
 find examples/all/manifests -type f ! -name '*.yaml' -delete
